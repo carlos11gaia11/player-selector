@@ -18,6 +18,7 @@
         .tier-A { background-color: #ffdf7f; }
         .tier-B { background-color: #ffff7f; }
         .tier-C { background-color: #808080; }
+        .tier-Cminus { background-color: #808080; }
         .lane-MID { border-left: 4px solid #9c27b0; }
         .lane-TOP { border-left: 4px solid #f44336; }
         .lane-JG { border-left: 4px solid #4caf50; }
@@ -319,6 +320,7 @@
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
+                            <option value="C-">C</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
                             <option value="F">F</option>
@@ -366,6 +368,7 @@
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
+                            <option value="C-">C-</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
                             <option value="F">F</option>
@@ -507,17 +510,17 @@
 
             const playersData = [
    {name: "Roronoa", lane: "MID", tier: "E"},
-  {name: "VerTho", lane: "MID", tier: "C"},
+  {name: "VerTho", lane: "MID", tier: "C-"},
   {name: "Todo gelo", lane: "MID", tier: "E"},
-  {name: "Bruninha", lane: "MID", tier: "C"},
+  {name: "Bruninha", lane: "MID", tier: "C-"},
 
   {name: "Tzuma", lane: "ADC", tier: "E"},
   {name: "Lima", lane: "ADC", tier: "D"},
   {name: "Velkan", lane: "ADC", tier: "D"},
   {name: "Arin", lane: "ADC", tier: "D"},
 
-  {name: "BONECAO", lane: "JG", tier: "C"},
-  {name: "Natan", lane: "JG", tier: "C"},
+  {name: "BONECAO", lane: "JG", tier: "C-"},
+  {name: "Natan", lane: "JG", tier: "C-"},
   {name: "Abacate Joia", lane: "JG", tier: "D"},
   {name: "Fael", lane: "JG", tier: "E"},
   {name: "PéDireitoDaBraia", lane: "JG", tier: "F"},
@@ -525,7 +528,7 @@
   {name: "Sajerb", lane: "SUP", tier: "E"},
   {name: "rzvirgulini", lane: "SUP", tier: "E"},
   {name: "Sykezao", lane: "SUP", tier: "D"},
-  {name: "Royak Soulout", lane: "SUP", tier: "C"},
+  {name: "Royak Soulout", lane: "SUP", tier: "C-"},
 
   {name: "Luis Erra Buraco", lane: "TOP", tier: "C"},
   {name: "Zeus", lane: "TOP", tier: "D"},
@@ -536,11 +539,11 @@
             // Pontuação por tier
             const tierScores = {
                 'C': 7,
-                'D': 5,
-                'E': 4,
-                'F': 3,
-                'G': 1,
-                '': 0
+                'C-': 5,
+                'D': 4,
+                'E': 3,
+                'F': 1,
+                'G': 0
             };
 
             // Variáveis de estado
@@ -845,6 +848,7 @@
                     case 'A': return 'text-yellow-600';
                     case 'B': return 'text-green-600';
                     case 'C': return 'text-greay-600';
+                    case 'C-': return 'text-greay-600';
                         case 'D': return 'text-greay-600';
                         case 'E': return 'text-greay-600';
                         case 'F': return 'text-greay-600';
