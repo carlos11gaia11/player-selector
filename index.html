@@ -333,7 +333,7 @@
 
         /* Animações personalizadas */
         .animate-pop {
-            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+            animation: popIn 0.6s cubiCbezier(0.68, -0.55, 0.265, 1.55) both;
         }
 
         @keyframes popIn {
@@ -429,7 +429,7 @@
                                 <option value="B">B</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
-                                <option value="C-">C-</option>
+                                <option value="C">C</option>
                                 <option value="D">D</option>
                                 <option value="E">E</option>
                                 <option value="F">F</option>
@@ -481,7 +481,7 @@
                                 <option value="B">B</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
-                                <option value="C-">C-</option>
+                                <option value="C">C</option>
                                 <option value="D">D</option>
                                 <option value="E">E</option>
                                 <option value="F">F</option>
@@ -645,43 +645,43 @@
 
                 const playersData = [
                     { name: "Roronoa", lane: "MID", tier: "E" },
-                    { name: "VerTho", lane: "MID", tier: "C-" },
+                    { name: "VerTho", lane: "MID", tier: "C" },
                     { name: "11gaia11", lane: "MID", tier: "B" },
                     { name: "Todo gelo", lane: "MID", tier: "D" },
-                    { name: "Bruninha tictic ", lane: "MID", tier: "C-" },
-                    { name: "Maxxter ", lane: "MID", tier: "C-" },
-                    { name: "nyu ", lane: "MID", tier: "C-" },
+                    { name: "Bruninha tictic ", lane: "MID", tier: "C" },
+                    { name: "Maxxter ", lane: "MID", tier: "C" },
+                    { name: "nyu ", lane: "MID", tier: "C" },
                     { name: "Giupponi ", lane: "MID", tier: "B" },
-                    { name: "Blacker ", lane: "MID", tier: "C-" },
+                    { name: "Blacker ", lane: "MID", tier: "C" },
                     { name: "Choraprone", lane: "MID", tier: "D" },
                     { name: "sigo na pica", lane: "MID", tier: "D" },
 
-                    { name: "M4 ツ ", lane: "SUP", tier: "C-" },
+                    { name: "M4 ツ ", lane: "SUP", tier: "C" },
                     { name: "Lulu do pix", lane: "SUP", tier: "D" },
                     { name: "chonki boi ", lane: "SUP", tier: "D" },
                     { name: "kakinami ", lane: "SUP", tier: "D" },
-                    { name: "Homem Salame ", lane: "SUP", tier: "C-" },
+                    { name: "Homem Salame ", lane: "SUP", tier: "C" },
                     { name: "Dark Moon ", lane: "SUP", tier: "E" },
                     { name: "Lunari ルナリ ", lane: "SUP", tier: "E" },
                     { name: "KERIA", lane: "SUP", tier: "C" },
-                    { name: "Mih Yuuki", lane: "SUP", tier: "C-" },
+                    { name: "Mih Yuuki", lane: "SUP", tier: "C" },
                     { name: "Sajerb", lane: "SUP", tier: "E" },
                     { name: "rzvirgulini", lane: "SUP", tier: "E" },
                     { name: "Sykezao", lane: "SUP", tier: "D" },
-                    { name: "Royak Soulout", lane: "SUP", tier: "C-" },
+                    { name: "Royak Soulout", lane: "SUP", tier: "C" },
 
-                    { name: "BONECAO", lane: "JG", tier: "C-" },
+                    { name: "BONECAO", lane: "JG", tier: "C" },
                     { name: "Hunter", lane: "JG", tier: "B" },
-                    { name: "Natan", lane: "JG", tier: "C-" },
+                    { name: "Natan", lane: "JG", tier: "C" },
                     { name: "Abacate Joia", lane: "JG", tier: "D" },
                     { name: "Fael", lane: "JG", tier: "E" },
-                    { name: "Tafarell", lane: "JG", tier: "C-" },
+                    { name: "Tafarell", lane: "JG", tier: "C" },
                     { name: "bernardinio ", lane: "JG", tier: "D" },
 
                     { name: "Zeus", lane: "TOP", tier: "D" },
                     { name: "MahRaquel", lane: "TOP", tier: "D" },
                     { name: "menephil", lane: "TOP", tier: "E" },
-                    { name: "Dhost ", lane: "TOP", tier: "C-" },
+                    { name: "Dhost ", lane: "TOP", tier: "C" },
                     { name: "kaiser 乡 ", lane: "TOP", tier: "C" },
                     { name: "Mahraquel", lane: "TOP", tier: "D" },
                     { name: "Menephyl ", lane: "TOP", tier: "E" },
@@ -689,7 +689,7 @@
                     { name: "Souzqk ", lane: "TOP", tier: "F" },
 
                     // Novos players
-                    { name: "Castiel", lane: "ADC", tier: "C-" },
+                    { name: "Castiel", lane: "ADC", tier: "C" },
                     { name: "Kutu kuku", lane: "ADC", tier: "B" },
                     { name: "DKV Julin ", lane: "ADC", tier: "C" },
                     { name: "Denver ", lane: "ADC", tier: "B" },
@@ -702,7 +702,7 @@
                     { name: "Velkan", lane: "ADC", tier: "D" },
                     { name: "Arin", lane: "ADC", tier: "D" },
                     { name: "Ryoma", lane: "ADC", tier: "B" },
-                    { name: "CaiThanos", lane: "ADC", tier: "C-" },
+                    { name: "CaiThanos", lane: "ADC", tier: "C" },
                 ];
 
                 // Pontuação por tier
@@ -1437,7 +1437,7 @@
                         case 'A': return 'text-yellow-600';
                         case 'B': return 'text-green-600';
                         case 'C': return 'text-greay-600';
-                        case 'C-': return 'text-greay-600';
+                        case 'C': return 'text-greay-600';
                         case 'D': return 'text-greay-600';
                         case 'E': return 'text-greay-600';
                         case 'F': return 'text-greay-600';
