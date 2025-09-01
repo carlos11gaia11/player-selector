@@ -1,70 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Select - League of Legends</title>
     <script src="https://cdn.tailwindcss.com"></script>
-      <!-- Bootstrap CSS -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      <!-- Animate.css -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .tier-S { background-color: #ff7f7f; }
-        .tier-Aplus { background-color: #ffbf7f; }
-        .tier-A { background-color: #ffdf7f; }
-        .tier-B { background-color: #ffff7f; }
-        .tier-Cplus { background-color: #808080; }
-        .tier-C { background-color: #808080; }
-        .tier-Cminus { background-color: #808080; }
-        .lane-MID { border-left: 4px solid #9c27b0; }
-        .lane-TOP { border-left: 4px solid #f44336; }
-        .lane-JG { border-left: 4px solid #4caf50; }
-        .lane-ADC { border-left: 4px solid #2196f3; }
-        .lane-SUP { border-left: 4px solid #ff9800; }
-        .team-dropzone { min-height: 150px; transition: all 0.3s; }
-        .team-dropzone.dragover { background-color: #e2e8f0; transform: scale(1.02); }
-        .player-card { transition: all 0.2s; cursor: grab; }
-        .player-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-        .player-card.dragging { opacity: 0.5; transform: scale(0.95); cursor: grabbing; }
-    
+        .tier-S {
+            background-color: #ff7f7f;
+        }
+
+        .tier-Aplus {
+            background-color: #ffbf7f;
+        }
+
+        .tier-A {
+            background-color: #ffdf7f;
+        }
+
+        .tier-B {
+            background-color: #ffff7f;
+        }
+
+        .tier-Cplus {
+            background-color: #808080;
+        }
+
+        .tier-C {
+            background-color: #808080;
+        }
+
+        .tier-Cminus {
+            background-color: #808080;
+        }
+
+        .lane-MID {
+            border-left: 4px solid #9c27b0;
+        }
+
+        .lane-TOP {
+            border-left: 4px solid #f44336;
+        }
+
+        .lane-JG {
+            border-left: 4px solid #4caf50;
+        }
+
+        .lane-ADC {
+            border-left: 4px solid #2196f3;
+        }
+
+        .lane-SUP {
+            border-left: 4px solid #ff9800;
+        }
+
+        .team-dropzone {
+            min-height: 150px;
+            transition: all 0.3s;
+        }
+
+        .team-dropzone.dragover {
+            background-color: #e2e8f0;
+            transform: scale(1.02);
+        }
+
+        .player-card {
+            transition: all 0.2s;
+            cursor: grab;
+        }
+
+        .player-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .player-card.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+            cursor: grabbing;
+        }
     </style>
     <style>
         :root {
-            --primary-color: #ff7300; /* Vermelho mais forte para o INSALUBRÃO */
+            --primary-color: #ff7300;
+            /* Vermelho mais forte para o INSALUBRÃO */
             --secondary-color: #000000;
             --accent-color: #ffffff;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             color: #333333;
         }
-        
+
         .navbar {
             background: linear-gradient(135deg, var(--primary-color), #000000);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.8rem;
         }
-        
+
         .nav-link {
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        
+
         .nav-link:hover {
             color: var(--accent-color) !important;
             transform: translateY(-2px);
         }
-        
+
         .hero-section {
             background: url('https://images.unsplash.com/photo-1543489822-c49534f0ad62?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
             background-size: cover;
@@ -76,27 +133,27 @@
             text-align: center;
             color: white;
         }
-        
+
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
         }
-        
+
         .hero-content {
             z-index: 1;
         }
-        
+
         .section-title {
             position: relative;
             margin-bottom: 3rem;
             font-weight: 700;
             color: var(--primary-color);
         }
-        
+
         .section-title:after {
             content: '';
             position: absolute;
@@ -108,26 +165,26 @@
             background: var(--primary-color);
             border-radius: 2px;
         }
-        
+
         .card {
             border: none;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             margin-bottom: 20px;
         }
-        
+
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .card-img-top {
             height: 200px;
             object-fit: cover;
         }
-        
+
         .btn-primary {
             background-color: var(--primary-color);
             border: none;
@@ -135,13 +192,13 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             background-color: #c0392b;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .social-icon {
             display: inline-flex;
             align-items: center;
@@ -155,52 +212,52 @@
             font-size: 1.5rem;
             transition: all 0.3s ease;
         }
-        
+
         .social-icon:hover {
             background-color: var(--secondary-color);
             transform: translateY(-5px) rotate(10deg);
         }
-        
+
         .feature-box {
             text-align: center;
             padding: 30px 20px;
             border-radius: 10px;
             background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             height: 100%;
         }
-        
+
         .feature-box:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .feature-icon {
             font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        
+
         .table-responsive {
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         table {
             margin-bottom: 0;
         }
-        
+
         thead {
             background-color: var(--primary-color);
             color: white;
         }
-        
+
         tbody tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        
+
         .player-tier {
             display: inline-block;
             padding: 5px 15px;
@@ -210,30 +267,57 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
-        .tier-s { background-color: #e74c3c; color: white; }
-        .tier-a { background-color: #f39c12; color: #333; }
-        .tier-b { background-color: #3498db; color: white; }
-        .tier-c { background-color: #9b59b6; color: white; }
-        .tier-d { background-color: #1abc9c; color: white; }
-        .tier-e { background-color: #1abc9c; color: white; }
-        .tier-f { background-color: #1abc9c; color: white; }
-        
+
+        .tier-s {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .tier-a {
+            background-color: #f39c12;
+            color: #333;
+        }
+
+        .tier-b {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .tier-c {
+            background-color: #9b59b6;
+            color: white;
+        }
+
+        .tier-d {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        .tier-e {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        .tier-f {
+            background-color: #1abc9c;
+            color: white;
+        }
+
         .event-card {
             border-left: 5px solid var(--primary-color);
             transition: all 0.3s ease;
         }
-        
+
         .event-card:hover {
             border-left-width: 10px;
         }
-        
+
         footer {
             background: linear-gradient(135deg, var(--primary-color), #000000);
             color: white;
             padding: 50px 0 20px;
         }
-        
+
         .footer-links a {
             color: #ddd;
             text-decoration: none;
@@ -241,27 +325,43 @@
             display: block;
             margin-bottom: 10px;
         }
-        
+
         .footer-links a:hover {
             color: var(--accent-color);
             padding-left: 5px;
         }
-        
+
         /* Animações personalizadas */
         .animate-pop {
             animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
         }
-        
+
         @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -293,673 +393,1123 @@
             </div>
         </div>
     </nav>
-    
-</head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-10 text-center">
-            <h1 class="text-4xl font-bold text-blue-800 mb-2">Player Select</h1>
-            <p class="text-xl text-gray-600">Organize seus jogadores de League of Legends em times balanceados</p>
-            <div class="mt-6 flex justify-center space-x-4">
-                <button id="resetAll" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex items-center">
-                    <i class="fas fa-redo mr-2"></i> Reiniciar
-                </button>
-            </div>
-        </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-10">
-            <!-- Filtros -->
-            <div class="bg-white p-6 rounded-xl shadow-md lg:col-span-1">
-                <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Filtros</h2>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Tier</label>
-                        <select id="tierFilter" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
-                            <option value="all">Todos</option>
-                            <option value="S">S</option>
-                            <option value="A+">A+</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C+">C+</option>
-                            <option value="C">C</option>
-                            <option value="C-">C-</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                            <option value="F">F</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Lane</label>
-                        <select id="laneFilter" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
-                            <option value="all">Todas</option>
-                            <option value="TOP">TOP</option>
-                            <option value="JG">JG</option>
-                            <option value="MID">MID</option>
-                            <option value="ADC">ADC</option>
-                            <option value="SUP">SUP</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Buscar Player</label>
-                        <input type="text" id="playerSearch" placeholder="Digite o nome..." class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <button id="applyFilters" class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                        Aplicar Filtros
+    </head>
+
+    <body class="bg-gray-100 font-sans">
+        <div class="container mx-auto px-4 py-8">
+            <header class="mb-10 text-center">
+                <h1 class="text-4xl font-bold text-blue-800 mb-2">Player Select</h1>
+                <p class="text-xl text-gray-600">Organize seus jogadores de League of Legends em times balanceados</p>
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button id="resetAll"
+                        class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex items-center">
+                        <i class="fas fa-redo mr-2"></i> Reiniciar
+                    </button>
+                    <button id="balanceTeams"
+                        class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center">
+                        <i class="fas fa-balance-scale mr-2"></i> Balancear Times
                     </button>
                 </div>
-            </div>
+            </header>
 
-            <!-- Lista de Players -->
-            <div class="bg-white p-6 rounded-xl shadow-md lg:col-span-3">
-                <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Adicionar ou Editar Jogador</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                        <input id="editName" placeholder="Nome" class="p-2 border rounded-md w-full">
-                        <select id="editLane" class="p-2 border rounded-md w-full">
-                            <option value="">Lane</option>
-                            <option value="TOP">TOP</option>
-                            <option value="JG">JG</option>
-                            <option value="MID">MID</option>
-                            <option value="ADC">ADC</option>
-                            <option value="SUP">SUP</option>
-                        </select>
-                        <select id="editTier" class="p-2 border rounded-md w-full">
-                            <option value="">Tier</option>
-                            <option value="S">S</option>
-                            <option value="A+">A+</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C+">C+</option>
-                            <option value="C">C</option>
-                            <option value="C-">C-</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                            <option value="F">F</option>
-                        </select>
-                        <button id="savePlayer" class="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 w-full">Salvar</button>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-10">
+                <!-- Filtros -->
+                <div class="bg-white p-6 rounded-xl shadow-md lg:col-span-1">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Filtros</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tier</label>
+                            <select id="tierFilter"
+                                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+                                <option value="all">Todos</option>
+                                <option value="S">S</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C+">C+</option>
+                                <option value="C">C</option>
+                                <option value="C-">C-</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Lane</label>
+                            <select id="laneFilter"
+                                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+                                <option value="all">Todas</option>
+                                <option value="TOP">TOP</option>
+                                <option value="JG">JG</option>
+                                <option value="MID">MID</option>
+                                <option value="ADC">ADC</option>
+                                <option value="SUP">SUP</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Buscar Player</label>
+                            <input type="text" id="playerSearch" placeholder="Digite o nome..."
+                                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <button id="applyFilters"
+                            class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+                            Aplicar Filtros
+                        </button>
                     </div>
                 </div>
 
-                <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Jogadores Disponíveis</h2>
-                <div id="playersList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                    <!-- Players serão inseridos aqui via JavaScript -->
+                <!-- Lista de Players -->
+                <div class="bg-white p-6 rounded-xl shadow-md lg:col-span-3">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Adicionar ou Editar Jogador</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                            <input id="editName" placeholder="Nome" class="p-2 border rounded-md w-full">
+                            <select id="editLane" class="p-2 border rounded-md w-full">
+                                <option value="">Lane</option>
+                                <option value="TOP">TOP</option>
+                                <option value="JG">JG</option>
+                                <option value="MID">MID</option>
+                                <option value="ADC">ADC</option>
+                                <option value="SUP">SUP</option>
+                            </select>
+                            <select id="editTier" class="p-2 border rounded-md w-full">
+                                <option value="">Tier</option>
+                                <option value="S">S</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C+">C+</option>
+                                <option value="C">C</option>
+                                <option value="C-">C-</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                            <button id="savePlayer"
+                                class="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 w-full">Salvar</button>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Jogadores Disponíveis</h2>
+                    <div id="playersList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        <!-- Players serão inseridos aqui via JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Times -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Time 1 -->
+                <div class="bg-blue-50 p-4 rounded-xl shadow-md border-2 border-blue-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-xl font-bold text-blue-800">Time A</h2>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">0/5</span>
+                    </div>
+                    <div id="team1" class="team-dropzone space-y-3 p-3 rounded-lg bg-blue-100 min-h-[200px]">
+                        <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
+                    </div>
+                    <div class="mt-3 text-sm text-blue-700">
+                        <div class="flex justify-between"><span>TOP:</span> <span id="team1-top"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>JG:</span> <span id="team1-jg"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>MID:</span> <span id="team1-mid"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>ADC:</span> <span id="team1-adc"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>SUP:</span> <span id="team1-sup"
+                                class="font-medium">-</span></div>
+                        <div class="mt-2 pt-2 border-t border-blue-200 flex justify-between font-semibold">
+                            <span>Pontuação:</span> <span id="team1-score">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time 2 -->
+                <div class="bg-red-50 p-4 rounded-xl shadow-md border-2 border-red-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-xl font-bold text-red-800">Time B</h2>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">0/5</span>
+                    </div>
+                    <div id="team2" class="team-dropzone space-y-3 p-3 rounded-lg bg-red-100 min-h-[200px]">
+                        <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
+                    </div>
+                    <div class="mt-3 text-sm text-red-700">
+                        <div class="flex justify-between"><span>TOP:</span> <span id="team2-top"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>JG:</span> <span id="team2-jg"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>MID:</span> <span id="team2-mid"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>ADC:</span> <span id="team2-adc"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>SUP:</span> <span id="team2-sup"
+                                class="font-medium">-</span></div>
+                        <div class="mt-2 pt-2 border-t border-red-200 flex justify-between font-semibold">
+                            <span>Pontuação:</span> <span id="team2-score">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time 3 -->
+                <div class="bg-green-50 p-4 rounded-xl shadow-md border-2 border-green-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-xl font-bold text-green-800">Time C</h2>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">0/5</span>
+                    </div>
+                    <div id="team3" class="team-dropzone space-y-3 p-3 rounded-lg bg-green-100 min-h-[200px]">
+                        <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
+                    </div>
+                    <div class="mt-3 text-sm text-green-700">
+                        <div class="flex justify-between"><span>TOP:</span> <span id="team3-top"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>JG:</span> <span id="team3-jg"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>MID:</span> <span id="team3-mid"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>ADC:</span> <span id="team3-adc"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>SUP:</span> <span id="team3-sup"
+                                class="font-medium">-</span></div>
+                        <div class="mt-2 pt-2 border-t border-green-200 flex justify-between font-semibold">
+                            <span>Pontuação:</span> <span id="team3-score">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time 4 -->
+                <div class="bg-purple-50 p-4 rounded-xl shadow-md border-2 border-purple-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-xl font-bold text-purple-800">Time D</h2>
+                        <span
+                            class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">0/5</span>
+                    </div>
+                    <div id="team4" class="team-dropzone space-y-3 p-3 rounded-lg bg-purple-100 min-h-[200px]">
+                        <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
+                    </div>
+                    <div class="mt-3 text-sm text-purple-700">
+                        <div class="flex justify-between"><span>TOP:</span> <span id="team4-top"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>JG:</span> <span id="team4-jg"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>MID:</span> <span id="team4-mid"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>ADC:</span> <span id="team4-adc"
+                                class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span>SUP:</span> <span id="team4-sup"
+                                class="font-medium">-</span></div>
+                        <div class="mt-2 pt-2 border-t border-purple-200 flex justify-between font-semibold">
+                            <span>Pontuação:</span> <span id="team4-score">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-white p-6 rounded-xl shadow-md border-2 border-gray-300">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Banco de Reservas</h2>
+                <div id="bench" class="team-dropzone space-y-3 p-3 rounded-lg bg-gray-100 min-h-[200px]">
+                    <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores aqui para deixar no banco</p>
                 </div>
             </div>
         </div>
 
-        <!-- Times -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Time 1 -->
-            <div class="bg-blue-50 p-4 rounded-xl shadow-md border-2 border-blue-200">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-xl font-bold text-blue-800">Time A</h2>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">0/5</span>
-                </div>
-                <div id="team1" class="team-dropzone space-y-3 p-3 rounded-lg bg-blue-100 min-h-[200px]">
-                    <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
-                </div>
-                <div class="mt-3 text-sm text-blue-700">
-                    <div class="flex justify-between"><span>TOP:</span> <span id="team1-top" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>JG:</span> <span id="team1-jg" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>MID:</span> <span id="team1-mid" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>ADC:</span> <span id="team1-adc" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>SUP:</span> <span id="team1-sup" class="font-medium">-</span></div>
-                    <div class="mt-2 pt-2 border-t border-blue-200 flex justify-between font-semibold">
-                        <span>Pontuação:</span> <span id="team1-score">0</span>
-                    </div>
-                </div>
-            </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Dados dos jogadores
+                document.getElementById('savePlayer').addEventListener('click', () => {
+                    const name = document.getElementById('editName').value.trim();
+                    const lane = document.getElementById('editLane').value;
+                    const tier = document.getElementById('editTier').value;
 
-            <!-- Time 2 -->
-            <div class="bg-red-50 p-4 rounded-xl shadow-md border-2 border-red-200">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-xl font-bold text-red-800">Time B</h2>
-                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">0/5</span>
-                </div>
-                <div id="team2" class="team-dropzone space-y-3 p-3 rounded-lg bg-red-100 min-h-[200px]">
-                    <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
-                </div>
-                <div class="mt-3 text-sm text-red-700">
-                    <div class="flex justify-between"><span>TOP:</span> <span id="team2-top" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>JG:</span> <span id="team2-jg" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>MID:</span> <span id="team2-mid" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>ADC:</span> <span id="team2-adc" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>SUP:</span> <span id="team2-sup" class="font-medium">-</span></div>
-                    <div class="mt-2 pt-2 border-t border-red-200 flex justify-between font-semibold">
-                        <span>Pontuação:</span> <span id="team2-score">0</span>
-                    </div>
-                </div>
-            </div>
+                    if (!name) {
+                        alert('Nome é obrigatório!');
+                        return;
+                    }
 
-            <!-- Time 3 -->
-            <div class="bg-green-50 p-4 rounded-xl shadow-md border-2 border-green-200">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-xl font-bold text-green-800">Time C</h2>
-                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">0/5</span>
-                </div>
-                <div id="team3" class="team-dropzone space-y-3 p-3 rounded-lg bg-green-100 min-h-[200px]">
-                    <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
-                </div>
-                <div class="mt-3 text-sm text-green-700">
-                    <div class="flex justify-between"><span>TOP:</span> <span id="team3-top" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>JG:</span> <span id="team3-jg" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>MID:</span> <span id="team3-mid" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>ADC:</span> <span id="team3-adc" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>SUP:</span> <span id="team3-sup" class="font-medium">-</span></div>
-                    <div class="mt-2 pt-2 border-t border-green-200 flex justify-between font-semibold">
-                        <span>Pontuação:</span> <span id="team3-score">0</span>
-                    </div>
-                </div>
-            </div>
+                    // Verifica se jogador já existe
+                    const existing = playersData.find(p => p.name.toLowerCase() === name.toLowerCase());
 
-            <!-- Time 4 -->
-            <div class="bg-purple-50 p-4 rounded-xl shadow-md border-2 border-purple-200">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-xl font-bold text-purple-800">Time D</h2>
-                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">0/5</span>
-                </div>
-                <div id="team4" class="team-dropzone space-y-3 p-3 rounded-lg bg-purple-100 min-h-[200px]">
-                    <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores para cá</p>
-                </div>
-                <div class="mt-3 text-sm text-purple-700">
-                    <div class="flex justify-between"><span>TOP:</span> <span id="team4-top" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>JG:</span> <span id="team4-jg" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>MID:</span> <span id="team4-mid" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>ADC:</span> <span id="team4-adc" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>SUP:</span> <span id="team4-sup" class="font-medium">-</span></div>
-                    <div class="mt-2 pt-2 border-t border-purple-200 flex justify-between font-semibold">
-                        <span>Pontuação:</span> <span id="team4-score">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    if (existing) {
+                        existing.lane = lane;
+                        existing.tier = tier;
+                    } else {
+                        playersData.push({ name, lane, tier });
+                    }
 
-        <div class="mt-10 bg-white p-6 rounded-xl shadow-md border-2 border-gray-300">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Banco de Reservas</h2>
-            <div id="bench" class="team-dropzone space-y-3 p-3 rounded-lg bg-gray-100 min-h-[200px]">
-                <p class="text-gray-500 text-sm text-center mt-10">Arraste jogadores aqui para deixar no banco</p>
-            </div>
-        </div>
-    </div>
+                    applyFilters(); // Atualiza a lista com os filtros aplicados
+                    document.getElementById('editName').value = '';
+                    document.getElementById('editLane').value = '';
+                    document.getElementById('editTier').value = '';
+                });
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados dos jogadores
-            document.getElementById('savePlayer').addEventListener('click', () => {
-                const name = document.getElementById('editName').value.trim();
-                const lane = document.getElementById('editLane').value;
-                const tier = document.getElementById('editTier').value;
+                const playersData = [
+                    { name: "Roronoa", lane: "MID", tier: "E" },
+                    { name: "VerTho", lane: "MID", tier: "C-" },
+                    { name: "11gaia11", lane: "MID", tier: "C+" },
+                    { name: "Todo gelo", lane: "MID", tier: "D" },
+                    { name: "Bruninha tictic ", lane: "MID", tier: "C-" },
+                    { name: "Maxxter ", lane: "MID", tier: "C-" },
+                    { name: "nyu ", lane: "MID", tier: "C-" },
+                    { name: "Giupponi ", lane: "MID", tier: "C+" },
+                    { name: "Blacker ", lane: "MID", tier: "C-" },
+                    { name: "Choraprone", lane: "MID", tier: "D" },
+                    { name: "sigo na pica", lane: "MID", tier: "D" },
 
-                if (!name) {
-                    alert('Nome é obrigatório!');
-                    return;
+                    { name: "M4 ツ ", lane: "SUP", tier: "C-" },
+                    { name: "Lulu do pix", lane: "SUP", tier: "D" },
+                    { name: "chonki boi ", lane: "SUP", tier: "D" },
+                    { name: "kakinami ", lane: "SUP", tier: "D" },
+                    { name: "Homem Salame ", lane: "SUP", tier: "C-" },
+                    { name: "Dark Moon ", lane: "SUP", tier: "E" },
+                    { name: "Lunari ルナリ ", lane: "SUP", tier: "E" },
+                    { name: "KERIA", lane: "SUP", tier: "C" },
+                    { name: "Mih Yuuki", lane: "SUP", tier: "C-" },
+                    { name: "Sajerb", lane: "SUP", tier: "E" },
+                    { name: "rzvirgulini", lane: "SUP", tier: "E" },
+                    { name: "Sykezao", lane: "SUP", tier: "D" },
+                    { name: "Royak Soulout", lane: "SUP", tier: "C-" },
+
+                    { name: "BONECAO", lane: "JG", tier: "C-" },
+                    { name: "Hunter", lane: "JG", tier: "C+" },
+                    { name: "Natan", lane: "JG", tier: "C-" },
+                    { name: "Abacate Joia", lane: "JG", tier: "D" },
+                    { name: "Fael", lane: "JG", tier: "E" },
+                    { name: "Tafarell", lane: "JG", tier: "C-" },
+                    { name: "bernardinio ", lane: "JG", tier: "D" },
+
+                    { name: "Zeus", lane: "TOP", tier: "D" },
+                    { name: "MahRaquel", lane: "TOP", tier: "D" },
+                    { name: "menephil", lane: "TOP", tier: "E" },
+                    { name: "Dhost ", lane: "TOP", tier: "C-" },
+                    { name: "kaiser 乡 ", lane: "TOP", tier: "C" },
+                    { name: "Mahraquel", lane: "TOP", tier: "D" },
+                    { name: "Menephyl ", lane: "TOP", tier: "E" },
+                    { name: "Shina ", lane: "TOP", tier: "C" },
+                    { name: "Souzqk ", lane: "TOP", tier: "F" },
+
+                    // Novos players
+                    { name: "Castiel", lane: "ADC", tier: "C-" },
+                    { name: "Kutu kuku", lane: "ADC", tier: "C+" },
+                    { name: "DKV Julin ", lane: "ADC", tier: "C" },
+                    { name: "Denver ", lane: "ADC", tier: "C+" },
+                    { name: "Fakkeemo", lane: "ADC", tier: "D" },
+                    { name: "Tzuma Omosapien", lane: "ADC", tier: "E" },
+                    { name: "ViniRp", lane: "ADC", tier: "D" },
+                    { name: "PéDireitoDaBraia", lane: "ADC", tier: "F" },
+                    { name: "Tzuma", lane: "ADC", tier: "E" },
+                    { name: "Lima", lane: "ADC", tier: "D" },
+                    { name: "Velkan", lane: "ADC", tier: "D" },
+                    { name: "Arin", lane: "ADC", tier: "D" },
+                    { name: "Ryoma", lane: "ADC", tier: "C+" },
+                    { name: "CaiThanos", lane: "ADC", tier: "C-" },
+                ];
+
+                // Pontuação por tier
+                const tierScores = {
+                    'S': 20,
+                    'A+': 15,
+                    'A': 13,
+                    'B': 11,
+                    'C+': 9,
+                    'C': 5,
+                    'C-': 4,
+                    'D': 3,
+                    'E': 2,
+                    'F': 1
+                };
+
+                // Variáveis de estado
+                let filteredPlayers = [...playersData];
+                let teams = {
+                    team1: { players: [], lanes: { TOP: null, JG: null, MID: null, ADC: null, SUP: null }, score: 0 },
+                    team2: { players: [], lanes: { TOP: null, JG: null, MID: null, ADC: null, SUP: null }, score: 0 },
+                    team3: { players: [], lanes: { TOP: null, JG: null, MID: null, ADC: null, SUP: null }, score: 0 },
+                    team4: { players: [], lanes: { TOP: null, JG: null, MID: null, ADC: null, SUP: null }, score: 0 },
+                    bench: { players: [], score: 0 } // Banco de Reservas
+                };
+
+                // Elementos DOM
+                const playersListEl = document.getElementById('playersList');
+                const teamElements = {
+                    team1: document.getElementById('team1'),
+                    team2: document.getElementById('team2'),
+                    team3: document.getElementById('team3'),
+                    team4: document.getElementById('team4'),
+                    bench: document.getElementById('bench')
+                };
+
+                // Inicialização
+                renderPlayersList(filteredPlayers);
+                setupDragAndDrop();
+                updateBalanceButtonState();
+
+                // Event Listeners
+                document.getElementById('applyFilters').addEventListener('click', applyFilters);
+                document.getElementById('playerSearch').addEventListener('input', applyFilters);
+                document.getElementById('balanceTeams').addEventListener('click', balanceTeams);
+                // Habilitar/desabilitar botão de balanceamento conforme o banco
+                function updateBalanceButtonState() {
+                    const btn = document.getElementById('balanceTeams');
+                    if (teams.bench.players.length === 0) {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
                 }
 
-                // Verifica se jogador já existe
-                const existing = playersData.find(p => p.name.toLowerCase() === name.toLowerCase());
+                // Atualizar botão sempre que mexer no banco
+                const originalUpdateTeamUI = updateTeamUI;
+                updateTeamUI = function (teamId) {
+                    originalUpdateTeamUI(teamId);
+                    if (teamId === 'bench') updateBalanceButtonState();
+                }
+                document.getElementById('resetAll').addEventListener('click', resetAll);
 
-                if (existing) {
-                    existing.lane = lane;
-                    existing.tier = tier;
-                } else {
-                    playersData.push({ name, lane, tier });
+                // Função para resetar todos os times
+                function resetAll() {
+                    // Limpar todos os times
+                    Object.keys(teams).forEach(teamId => {
+                        teams[teamId].players = [];
+                        teams[teamId].score = 0;
+                        if (teamId !== 'bench') {
+                            teams[teamId].lanes = { TOP: null, JG: null, MID: null, ADC: null, SUP: null };
+                        }
+                        updateTeamUI(teamId);
+                    });
+
+                    // Recarregar lista de players disponíveis
+                    applyFilters();
                 }
 
-                applyFilters(); // Atualiza a lista com os filtros aplicados
-                document.getElementById('editName').value = '';
-                document.getElementById('editLane').value = '';
-                document.getElementById('editTier').value = '';
-            });
+                // Função para balancear times automaticamente
+                function balanceTeams() {
+                    // Só faz balanceamento se houver jogadores no banco
+                    if (teams.bench.players.length === 0) {
+                        alert('Adicione jogadores ao banco de reservas para balancear os times!');
+                        return;
+                    }
 
-            const playersData = [
-  {name: "Roronoa", lane: "MID", tier: "E"},
-  {name: "VerTho", lane: "MID", tier: "C-"},
-  {name: "11gaia11", lane: "MID", tier: "C+"},
-  {name: "Todo gelo", lane: "MID", tier: "D"},
-  {name: "Bruninha tictic ", lane: "MID", tier: "C-"},
-  {name: "Maxxter ", lane: "MID", tier: "C-"},
-  {name: "nyu ", lane: "MID", tier: "C-"},
-  {name: "Giupponi ", lane: "MID", tier: "C+"},
-  {name: "Blacker ", lane: "MID", tier: "C-"},
-  {name: "Choraprone", lane: "MID", tier: "D"},
-  {name: "sigo na pica", lane: "MID", tier: "D"},
-                
-  {name: "M4 ツ ", lane: "SUP", tier: "C-"},
-  {name: "Lulu do pix", lane: "SUP", tier: "D"},
-  {name: "chonki boi ", lane: "SUP", tier: "D"},
-  {name: "kakinami ", lane: "SUP", tier: "D"},
-  {name: "Homem Salame ", lane: "SUP", tier: "C-"},
-  {name: "Dark Moon ", lane: "SUP", tier: "E"},
-  {name: "Lunari ルナリ ", lane: "SUP", tier: "E"},
-  {name: "KERIA", lane: "SUP", tier: "C"},
-  {name: "Mih Yuuki", lane: "SUP", tier: "C-"},
-  {name: "Sajerb", lane: "SUP", tier: "E"},
-  {name: "rzvirgulini", lane: "SUP", tier: "E"},
-  {name: "Sykezao", lane: "SUP", tier: "D"},
-  {name: "Royak Soulout", lane: "SUP", tier: "C-"},
-  
-  {name: "BONECAO", lane: "JG", tier: "C-"},
-  {name: "Hunter", lane: "JG", tier: "C+"},
-  {name: "Natan", lane: "JG", tier: "C-"},
-  {name: "Abacate Joia", lane: "JG", tier: "D"},
-  {name: "Fael", lane: "JG", tier: "E"},
-  {name: "Tafarell", lane: "JG", tier: "C-"},
-  {name: "bernardinio ", lane: "JG", tier: "D"},
+                    // Usar apenas os jogadores do banco para montar os times
+                    const availablePlayers = [...teams.bench.players];
 
-  {name: "Zeus", lane: "TOP", tier: "D"},
-  {name: "MahRaquel", lane: "TOP", tier: "D"},
-  {name: "menephil", lane: "TOP", tier: "E"},
-  {name: "Dhost ", lane: "TOP", tier: "C-"},
-  {name: "kaiser 乡 ", lane: "TOP", tier: "C"},
-  {name: "Mahraquel", lane: "TOP", tier: "D"},
-  {name: "Menephyl ", lane: "TOP", tier: "E"},
-  {name: "Shina ", lane: "TOP", tier: "C"},           
-  {name: "Souzqk ", lane: "TOP", tier: "F"},
+                    // Calcular número de times completos
+                    const numTeams = Math.floor(availablePlayers.length / 5);
+                    if (numTeams < 1) {
+                        alert('É necessário pelo menos 5 jogadores no banco para montar um time!');
+                        return;
+                    }
 
-  // Novos players
-  {name: "Castiel", lane: "ADC", tier: "C-"},
-  {name: "Kutu kuku", lane: "ADC", tier: "C+"},
-  {name: "DKV Julin ", lane: "ADC", tier: "C"},
-  {name: "Denver ", lane: "ADC", tier: "C+"},
-  {name: "Fakkeemo", lane: "ADC", tier: "D"},
-  {name: "Tzuma Omosapien", lane: "ADC", tier: "E"},
-  {name: "ViniRp", lane: "ADC", tier: "D"},
-  {name: "PéDireitoDaBraia", lane: "ADC", tier: "F"},
-  {name: "Tzuma", lane: "ADC", tier: "E"},
-  {name: "Lima", lane: "ADC", tier: "D"},
-  {name: "Velkan", lane: "ADC", tier: "D"},
-  {name: "Arin", lane: "ADC", tier: "D"},
-  {name: "Ryoma", lane: "ADC", tier: "C+"},
-  {name: "CaiThanos", lane: "ADC", tier: "C-"},
+                    // Limpar times e banco
+                    Object.keys(teams).forEach(teamId => {
+                        teams[teamId].players = [];
+                        teams[teamId].score = 0;
+                        if (teamId !== 'bench') {
+                            teams[teamId].lanes = { TOP: null, JG: null, MID: null, ADC: null, SUP: null };
+                        }
+                    });
+                    teams.bench.players = [];
+                    teams.bench.score = 0;
 
- 
+                    // Funções de filtragem por lane
+                    function getPlayersByLaneFromBench() {
+                        return {
+                            TOP: availablePlayers.filter(p => p.lane === 'TOP').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                            JG: availablePlayers.filter(p => p.lane === 'JG').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                            MID: availablePlayers.filter(p => p.lane === 'MID').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                            ADC: availablePlayers.filter(p => p.lane === 'ADC').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                            SUP: availablePlayers.filter(p => p.lane === 'SUP').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0))
+                        };
+                    }
 
+                    // Validação lanes
+                    function validatePlayerCountBench() {
+                        const lanes = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
+                        const missingLanes = [];
+                        lanes.forEach(lane => {
+                            const count = availablePlayers.filter(p => p.lane === lane).length;
+                            if (count < numTeams) missingLanes.push(lane);
+                        });
+                        if (missingLanes.length > 0) {
+                            alert(`⚠️ Não há jogadores suficientes nas lanes para montar ${numTeams} times: ${missingLanes.join(', ')}`);
+                            return false;
+                        }
+                        return true;
+                    }
 
-];
+                    if (!validatePlayerCountBench()) return;
 
-            // Pontuação por tier
-            const tierScores = {
-    'S': 20,
-    'A+': 15,
-    'A': 13,
-    'B': 11,
-    'C+': 9,
-    'C': 5,
-    'C-': 4,
-    'D': 3,
-    'E': 2,
-    'F': 1
-            };
+                    // Algoritmo ótimo de balanceamento
+                    const lanes = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
+                    // Gerar todos os times possíveis
+                    let lanePlayers = lanes.map(lane => availablePlayers.filter(p => p.lane === lane));
+                    // Se não há jogadores suficientes por lane, aborta
+                    if (lanePlayers.some(arr => arr.length < numTeams)) {
+                        alert('Não há jogadores suficientes em todas as lanes para formar todos os times completos!');
+                        return;
+                    }
 
-            // Variáveis de estado
-            let filteredPlayers = [...playersData];
-            let teams = {
-                team1: {players: [], lanes: {TOP: null, JG: null, MID: null, ADC: null, SUP: null}, score: 0},
-                team2: {players: [], lanes: {TOP: null, JG: null, MID: null, ADC: null, SUP: null}, score: 0},
-                team3: {players: [], lanes: {TOP: null, JG: null, MID: null, ADC: null, SUP: null}, score: 0},
-                team4: {players: [], lanes: {TOP: null, JG: null, MID: null, ADC: null, SUP: null}, score: 0},
-                bench: {players: [], score: 0} // Banco de Reservas
-            };
+                    // Gerar todas as combinações possíveis de times
+                    function getCombinations(arr, k) {
+                        // arr: array de jogadores de uma lane, k: times
+                        if (k === 1) return arr.map(x => [x]);
+                        let combos = [];
+                        for (let i = 0; i < arr.length; i++) {
+                            let rest = arr.slice(0, i).concat(arr.slice(i + 1));
+                            let subcombos = getCombinations(rest, k - 1);
+                            subcombos.forEach(sub => combos.push([arr[i], ...sub]));
+                        }
+                        return combos;
+                    }
 
-            // Elementos DOM
-            const playersListEl = document.getElementById('playersList');
-            const teamElements = {
-                team1: document.getElementById('team1'),
-                team2: document.getElementById('team2'),
-                team3: document.getElementById('team3'),
-                team4: document.getElementById('team4'),
-                bench: document.getElementById('bench')
-            };
+                    // Para cada lane, pegar todas as combinações possíveis de jogadores para os times
+                    let laneCombos = lanePlayers.map(arr => getCombinations(arr, numTeams));
+                    // laneCombos: [ [combosTOP], [combosJG], ... ]
 
-            // Inicialização
-            renderPlayersList(filteredPlayers);
-            setupDragAndDrop();
+                    // Gerar todas as combinações de times completos
+                    let bestTeams = null;
+                    let bestDiff = Infinity;
+                    let bestScores = null;
 
-            // Event Listeners
-            document.getElementById('applyFilters').addEventListener('click', applyFilters);
-            document.getElementById('playerSearch').addEventListener('input', applyFilters);
-            document.getElementById('balanceTeams').addEventListener('click', balanceTeams);
-            document.getElementById('resetAll').addEventListener('click', resetAll);
+                    // Para cada combinação de TOP, JG, MID, ADC, SUP
+                    for (let topCombo of laneCombos[0]) {
+                        for (let jgCombo of laneCombos[1]) {
+                            for (let midCombo of laneCombos[2]) {
+                                for (let adcCombo of laneCombos[3]) {
+                                    for (let supCombo of laneCombos[4]) {
+                                        // Montar times
+                                        let teamsArr = [];
+                                        let usedNames = new Set();
+                                        let valid = true;
+                                        for (let i = 0; i < numTeams; i++) {
+                                            let teamPlayers = [topCombo[i], jgCombo[i], midCombo[i], adcCombo[i], supCombo[i]];
+                                            // Verifica se há jogadores repetidos
+                                            let names = teamPlayers.map(p => p.name);
+                                            if (names.some(n => usedNames.has(n))) {
+                                                valid = false;
+                                                break;
+                                            }
+                                            names.forEach(n => usedNames.add(n));
+                                            teamsArr.push(teamPlayers);
+                                        }
+                                        if (!valid) continue;
+                                        // Calcular pontuação dos times
+                                        let scores = teamsArr.map(team => team.reduce((sum, p) => sum + (tierScores[p.tier] || 0), 0));
+                                        let diff = Math.max(...scores) - Math.min(...scores);
+                                        if (diff < bestDiff) {
+                                            bestDiff = diff;
+                                            bestTeams = teamsArr;
+                                            bestScores = scores;
+                                            if (diff === 0) break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-            // Função para renderizar a lista de jogadores
-            function renderPlayersList(players) {
-                playersListEl.innerHTML = '';
-                
-                players.forEach(player => {
-                    const playerCard = document.createElement('div');
-                    playerCard.className = `player-card bg-white rounded-lg p-3 shadow flex flex-col ${player.lane ? 'lane-' + player.lane : ''} ${player.tier ? 'tier-' + player.tier.replace('+', 'plus') : ''}`;
-                    playerCard.draggable = true;
-                    playerCard.dataset.name = player.name;
-                    playerCard.dataset.lane = player.lane;
-                    playerCard.dataset.tier = player.tier;
+                    // Montar os times na estrutura
+                    const teamIds = Array.from({ length: numTeams }, (_, i) => `team${i + 1}`);
+                    Object.keys(teams).forEach(teamId => {
+                        teams[teamId].players = [];
+                        teams[teamId].score = 0;
+                        if (teamId !== 'bench') {
+                            teams[teamId].lanes = { TOP: null, JG: null, MID: null, ADC: null, SUP: null };
+                        }
+                    });
+                    teams.bench.players = availablePlayers.filter(p => {
+                        // Se não está em nenhum time
+                        return !bestTeams.flat().some(tp => tp.name === p.name);
+                    });
+                    teams.bench.score = teams.bench.players.reduce((sum, p) => sum + (tierScores[p.tier] || 0), 0);
 
-                    playerCard.innerHTML = `
+                    for (let i = 0; i < numTeams; i++) {
+                        let teamId = teamIds[i];
+                        let teamPlayers = bestTeams[i];
+                        teams[teamId].players = teamPlayers;
+                        teams[teamId].score = bestScores[i];
+                        teams[teamId].lanes = {
+                            TOP: teamPlayers[0].name,
+                            JG: teamPlayers[1].name,
+                            MID: teamPlayers[2].name,
+                            ADC: teamPlayers[3].name,
+                            SUP: teamPlayers[4].name
+                        };
+                    }
+
+                    teamIds.forEach(teamId => updateTeamUI(teamId));
+                    updateTeamUI('bench');
+                    showBalanceResult(teamIds);
+                }
+
+                // Validar se há jogadores suficientes para formar times
+                function validatePlayerCount() {
+                    const lanes = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
+                    const missingLanes = [];
+
+                    lanes.forEach(lane => {
+                        const playersInLane = playersData.filter(p => p.lane === lane).length;
+                        if (playersInLane === 0) {
+                            missingLanes.push(lane);
+                        }
+                    });
+
+                    if (missingLanes.length > 0) {
+                        alert(`⚠️ Atenção!\n\nNão há jogadores suficientes nas seguintes posições:\n${missingLanes.join(', ')}\n\nAdicione jogadores nessas posições para formar times completos.`);
+                        return false;
+                    }
+
+                    // Avisar se alguma lane tem menos de 4 jogadores
+                    const warningLanes = [];
+                    lanes.forEach(lane => {
+                        const playersInLane = playersData.filter(p => p.lane === lane).length;
+                        if (playersInLane < 4 && playersInLane > 0) {
+                            warningLanes.push(`${lane} (${playersInLane} jogadores)`);
+                        }
+                    });
+
+                    if (warningLanes.length > 0) {
+                        const proceed = confirm(`⚠️ Algumas posições têm poucos jogadores:\n${warningLanes.join(', ')}\n\nIsso pode resultar em times incompletos. Deseja continuar mesmo assim?`);
+                        return proceed;
+                    }
+
+                    return true;
+                }
+
+                // Função para separar jogadores por lane
+                function getPlayersByLane() {
+                    return {
+                        TOP: playersData.filter(p => p.lane === 'TOP').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                        JG: playersData.filter(p => p.lane === 'JG').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                        MID: playersData.filter(p => p.lane === 'MID').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                        ADC: playersData.filter(p => p.lane === 'ADC').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0)),
+                        SUP: playersData.filter(p => p.lane === 'SUP').sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0))
+                    };
+                }
+
+                // Função para distribuir jogadores de uma lane específica
+                function distributeLanePlayers(lane, players, teamIds) {
+                    if (players.length === 0) return;
+
+                    if (players.length >= 4) {
+                        distributeTopPlayers(players, teamIds);
+                    } else {
+                        distributeRemainingPlayers(lane, players, teamIds);
+                    }
+                }
+
+                // Distribuir os 4 melhores jogadores
+                function distributeTopPlayers(players, teamIds) {
+                    for (let i = 0; i < 4 && i < players.length; i++) {
+                        addPlayerToTeamForBalance(teamIds[i], players[i]);
+                    }
+
+                    for (let i = 4; i < players.length; i++) {
+                        addPlayerToBench(players[i]);
+                    }
+                }
+
+                // Distribuir jogadores restantes quando há menos de 4
+                function distributeRemainingPlayers(lane, players, teamIds) {
+                    let playerIndex = 0;
+                    let teamIndex = 0;
+
+                    while (playerIndex < players.length && teamIndex < 4) {
+                        const teamId = teamIds[teamIndex];
+
+                        if (!teams[teamId].lanes[lane]) {
+                            addPlayerToTeamForBalance(teamId, players[playerIndex]);
+                            playerIndex++;
+                        }
+                        teamIndex = (teamIndex + 1) % 4;
+                    }
+
+                    for (let i = playerIndex; i < players.length; i++) {
+                        addPlayerToBench(players[i]);
+                    }
+                }
+
+                // Função auxiliar para adicionar jogador durante o balanceamento
+                function addPlayerToTeamForBalance(teamId, player) {
+                    if (teams[teamId].lanes[player.lane]) return false; // Lane já ocupada
+
+                    teams[teamId].players.push(player);
+                    teams[teamId].lanes[player.lane] = player.name;
+                    teams[teamId].score += tierScores[player.tier] || 0;
+                    return true;
+                }
+
+                // Função para tentar rebalancear times muito desiguais
+                function rebalanceTeams() {
+                    const teamIds = ['team1', 'team2', 'team3', 'team4'];
+                    const maxIterations = 50;
+                    let iteration = 0;
+
+                    while (iteration < maxIterations) {
+                        iteration++;
+                        const { maxTeamId, minTeamId, maxScore, minScore } = getTeamScoreStats(teamIds);
+
+                        if (maxScore - minScore <= 3) break;
+
+                        const swapMade = attemptPlayerSwap(maxTeamId, minTeamId, maxScore, minScore);
+                        if (!swapMade) break;
+                    }
+                }
+
+                // Obter estatísticas de pontuação dos times
+                function getTeamScoreStats(teamIds) {
+                    const scores = teamIds.map(id => teams[id].score);
+                    const maxScore = Math.max(...scores);
+                    const minScore = Math.min(...scores);
+                    const maxTeamId = teamIds[scores.indexOf(maxScore)];
+                    const minTeamId = teamIds[scores.indexOf(minScore)];
+
+                    return { maxTeamId, minTeamId, maxScore, minScore };
+                }
+
+                // Tentar trocar jogadores entre times
+                function attemptPlayerSwap(maxTeamId, minTeamId, maxScore, minScore) {
+                    const maxTeamPlayers = teams[maxTeamId].players;
+                    const minTeamPlayers = teams[minTeamId].players;
+
+                    for (let i = 0; i < maxTeamPlayers.length; i++) {
+                        for (let j = 0; j < minTeamPlayers.length; j++) {
+                            const player1 = maxTeamPlayers[i];
+                            const player2 = minTeamPlayers[j];
+
+                            if (canSwapPlayers(player1, player2, maxScore, minScore, maxTeamId, minTeamId)) {
+                                performPlayerSwap(maxTeamId, minTeamId, i, j, player1, player2);
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                // Verificar se a troca de jogadores é benéfica
+                function canSwapPlayers(player1, player2, maxScore, minScore, maxTeamId, minTeamId) {
+                    if (player1.lane !== player2.lane) return false;
+
+                    const score1 = tierScores[player1.tier] || 0;
+                    const score2 = tierScores[player2.tier] || 0;
+                    const newMaxScore = teams[maxTeamId].score - score1 + score2;
+                    const newMinScore = teams[minTeamId].score - score2 + score1;
+
+                    return Math.abs(newMaxScore - newMinScore) < Math.abs(maxScore - minScore);
+                }
+
+                // Realizar a troca de jogadores
+                function performPlayerSwap(maxTeamId, minTeamId, i, j, player1, player2) {
+                    const score1 = tierScores[player1.tier] || 0;
+                    const score2 = tierScores[player2.tier] || 0;
+
+                    teams[maxTeamId].players[i] = player2;
+                    teams[minTeamId].players[j] = player1;
+                    teams[maxTeamId].lanes[player1.lane] = player2.name;
+                    teams[minTeamId].lanes[player2.lane] = player1.name;
+                    teams[maxTeamId].score = teams[maxTeamId].score - score1 + score2;
+                    teams[minTeamId].score = teams[minTeamId].score - score2 + score1;
+                }
+
+                // Função para mostrar resultado do balanceamento
+                function showBalanceResult(teamIds) {
+                    const scores = teamIds.map(id => teams[id].score);
+                    let message = '🎮 LEAGUE OF LEGENDS - Resultado do Balanceamento:\n\n';
+                    teamIds.forEach((id, index) => {
+                        const team = teams[id];
+                        const completePlayers = team.players.length;
+                        message += `Time ${String.fromCharCode(65 + index)}: ${scores[index]} pontos (${completePlayers}/5 jogadores)\n`;
+                        const lanes = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
+                        const composition = lanes.map(lane =>
+                            team.lanes[lane] ? `${lane}: ✅` : `${lane}: ❌`
+                        ).join(' | ');
+                        message += `   ${composition}\n\n`;
+                    });
+                    const maxScore = Math.max(...scores);
+                    const minScore = Math.min(...scores);
+                    const difference = maxScore - minScore;
+                    message += `📊 Diferença máxima: ${difference} pontos\n`;
+                    const completeTeams = teamIds.filter(id => teams[id].players.length === 5).length;
+                    message += `✅ Times completos (5/5): ${completeTeams}/${teamIds.length}\n\n`;
+                    if (difference <= 2) {
+                        message += '🏆 Times muito bem balanceados!\n';
+                    } else if (difference <= 4) {
+                        message += '⚖️ Times razoavelmente balanceados.\n';
+                    } else {
+                        message += '⚠️ Balanceamento pode ser melhorado.\n';
+                    }
+                    if (completeTeams < teamIds.length) {
+                        message += '\n💡 Dica: Adicione mais jogadores para completar todos os times!';
+                    }
+                    // alert(message); // Removido conforme solicitado
+                }
+
+                // Função para renderizar a lista de jogadores
+                function renderPlayersList(players) {
+                    playersListEl.innerHTML = '';
+
+                    players.forEach(player => {
+                        const playerCard = document.createElement('div');
+                        playerCard.className = `player-card bg-white rounded-lg p-3 shadow flex flex-col ${player.lane ? 'lane-' + player.lane : ''} ${player.tier ? 'tier-' + player.tier.replace('+', 'plus') : ''}`;
+                        playerCard.draggable = true;
+                        playerCard.dataset.name = player.name;
+                        playerCard.dataset.lane = player.lane;
+                        playerCard.dataset.tier = player.tier;
+
+                        playerCard.innerHTML = `
+                            <div class="font-semibold text-gray-800 truncate">${player.name}</div>
+                            <div class="flex justify-between text-sm mt-1">
+                                <span class="text-gray-600">${player.lane || 'N/D'}</span>
+                                <span class="font-medium ${getTierColorClass(player.tier)}">${player.tier || 'N/D'}</span>
+                            </div>
+                            <button class="mt-2 text-xs text-blue-600 hover:text-blue-800 self-end add-to-bench" data-name="${player.name}">
+                                <i class="fas fa-plus"></i> Adicionar ao banco
+                            </button>
+                        `;
+
+                        playerCard.addEventListener('dragstart', function (e) {
+                            this.classList.add('dragging');
+                            e.dataTransfer.setData('text/plain', this.dataset.name);
+                            setTimeout(() => this.classList.add('opacity-0'), 0);
+                        });
+
+                        playerCard.addEventListener('dragend', function () {
+                            this.classList.remove('dragging', 'opacity-0');
+                        });
+
+                        // Botão para adicionar ao banco
+                        playerCard.querySelector('.add-to-bench').addEventListener('click', function () {
+                            const playerName = this.dataset.name;
+                            const playerObj = playersData.find(p => p.name === playerName);
+                            if (playerObj) {
+                                // Remove de todos os times e do banco (caso já esteja)
+                                Object.keys(teams).forEach(id => {
+                                    removePlayerFromTeam(id, playerObj.name);
+                                });
+                                // Adiciona ao banco
+                                addPlayerToBench(playerObj);
+                                // Atualiza lista para mostrar os que ainda não estão no banco
+                                applyFilters();
+                            }
+                        });
+
+                        playersListEl.appendChild(playerCard);
+                    });
+                }
+
+                // Configurar drag and drop para os times e banco
+                function setupDragAndDrop() {
+                    Object.keys(teamElements).forEach(teamId => {
+                        const teamEl = teamElements[teamId];
+
+                        teamEl.addEventListener('dragover', function (e) {
+                            e.preventDefault();
+                            this.classList.add('dragover');
+                        });
+
+                        teamEl.addEventListener('dragleave', function () {
+                            this.classList.remove('dragover');
+                        });
+
+                        teamEl.addEventListener('drop', function (e) {
+                            e.preventDefault();
+                            this.classList.remove('dragover');
+
+                            const playerName = e.dataTransfer.getData('text/plain');
+                            const player = playersData.find(p => p.name === playerName);
+
+                            if (player) {
+                                // Remove o jogador de todos os times e do banco
+                                Object.keys(teams).forEach(id => {
+                                    removePlayerFromTeam(id, player.name);
+                                });
+
+                                // Adiciona ao time ou banco atual
+                                if (teamId === 'bench') {
+                                    addPlayerToBench(player);
+                                } else {
+                                    addPlayerToTeam(teamId, player);
+                                }
+                            }
+                        });
+                    });
+                }
+
+                // Adicionar jogador a um time
+                function addPlayerToTeam(teamId, player) {
+                    // Verificar se a lane já está preenchida
+                    if (player.lane && teams[teamId].lanes[player.lane]) {
+                        alert(`Este time já tem um jogador na lane ${player.lane}!`);
+                        return;
+                    }
+
+                    // Adicionar ao time
+                    teams[teamId].players.push(player);
+                    if (player.lane) {
+                        teams[teamId].lanes[player.lane] = player.name;
+                    }
+
+                    // Atualizar pontuação
+                    teams[teamId].score += tierScores[player.tier] || 0;
+
+                    // Atualizar UI
+                    updateTeamUI(teamId);
+                }
+
+                // Adicionar jogador ao banco
+                function addPlayerToBench(player) {
+                    teams.bench.players.push(player);
+                    teams.bench.score += tierScores[player.tier] || 0;
+                    updateTeamUI('bench');
+                }
+
+                function updateTeamUI(teamId) {
+                    const team = teams[teamId];
+                    const teamEl = teamElements[teamId];
+                    teamEl.innerHTML = '';
+
+                    if (teamId === 'bench') {
+                        // Cria colunas para cada lane
+                        const lanes = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
+                        const benchGrid = document.createElement('div');
+                        benchGrid.className = 'grid grid-cols-5 gap-2';
+
+                        lanes.forEach(lane => {
+                            const column = document.createElement('div');
+                            column.className = 'space-y-2';
+
+                            const title = document.createElement('div');
+                            title.className = 'text-center font-bold text-sm text-gray-700';
+                            title.textContent = lane;
+                            column.appendChild(title);
+
+                            const players = [...team.players]
+                                .filter(p => p.lane === lane)
+                                .sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0));
+
+                            players.forEach(player => {
+                                const card = document.createElement('div');
+                                card.className = `player-card bg-white rounded-lg p-2 shadow text-sm ${player.tier ? 'tier-' + player.tier.replace('+', 'plus') : ''}`;
+                                card.draggable = true;
+                                card.dataset.name = player.name;
+
+                                card.innerHTML = `
+                                <div class="font-semibold text-gray-800 truncate">${player.name}</div>
+                                <div class="flex justify-between text-xs mt-1">
+                                    <span class="text-gray-600">${player.tier || 'N/D'}</span>
+                                    <button class="text-red-600 hover:text-red-800 remove-player" data-name="${player.name}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            `;
+
+                                card.addEventListener('dragstart', function (e) {
+                                    this.classList.add('dragging');
+                                    e.dataTransfer.setData('text/plain', this.dataset.name);
+                                    setTimeout(() => this.classList.add('opacity-0'), 0);
+                                });
+
+                                card.addEventListener('dragend', function () {
+                                    this.classList.remove('dragging', 'opacity-0');
+                                });
+
+                                column.appendChild(card);
+                            });
+
+                            benchGrid.appendChild(column);
+                        });
+
+                        teamEl.appendChild(benchGrid);
+
+                        // Event listener para remover jogador
+                        teamEl.querySelectorAll('.remove-player').forEach(btn => {
+                            btn.addEventListener('click', function () {
+                                removePlayerFromTeam(teamId, this.dataset.name);
+                            });
+                        });
+
+                        return; // Para não executar o restante
+                    }
+
+                    // Para times normais
+                    const laneOrder = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
+                    const orderedPlayers = [...team.players].sort((a, b) => {
+                        const indexA = laneOrder.indexOf(a.lane);
+                        const indexB = laneOrder.indexOf(b.lane);
+                        return indexA - indexB;
+                    });
+
+                    orderedPlayers.forEach(player => {
+                        const playerCard = document.createElement('div');
+                        playerCard.className = `player-card bg-white rounded-lg p-3 shadow flex flex-col ${player.lane ? 'lane-' + player.lane : ''} ${player.tier ? 'tier-' + player.tier.replace('+', 'plus') : ''}`;
+                        playerCard.draggable = true;
+                        playerCard.dataset.name = player.name;
+
+                        playerCard.innerHTML = `
                         <div class="font-semibold text-gray-800 truncate">${player.name}</div>
                         <div class="flex justify-between text-sm mt-1">
                             <span class="text-gray-600">${player.lane || 'N/D'}</span>
                             <span class="font-medium ${getTierColorClass(player.tier)}">${player.tier || 'N/D'}</span>
                         </div>
-                    `;
-                    
-                    playerCard.addEventListener('dragstart', function(e) {
-                        this.classList.add('dragging');
-                        e.dataTransfer.setData('text/plain', this.dataset.name);
-                        setTimeout(() => this.classList.add('opacity-0'), 0);
-                    });
-                    
-                    playerCard.addEventListener('dragend', function() {
-                        this.classList.remove('dragging', 'opacity-0');
-                    });
-                    
-                    playersListEl.appendChild(playerCard);
-                });
-            }
-
-            // Configurar drag and drop para os times e banco
-            function setupDragAndDrop() {
-                Object.keys(teamElements).forEach(teamId => {
-                    const teamEl = teamElements[teamId];
-                    
-                    teamEl.addEventListener('dragover', function(e) {
-                        e.preventDefault();
-                        this.classList.add('dragover');
-                    });
-                    
-                    teamEl.addEventListener('dragleave', function() {
-                        this.classList.remove('dragover');
-                    });
-                    
-                    teamEl.addEventListener('drop', function(e) {
-                        e.preventDefault();
-                        this.classList.remove('dragover');
-                        
-                        const playerName = e.dataTransfer.getData('text/plain');
-                        const player = playersData.find(p => p.name === playerName);
-                        
-                        if (player) {
-                            // Remove o jogador de todos os times e do banco
-                            Object.keys(teams).forEach(id => {
-                                removePlayerFromTeam(id, player.name);
-                            });
-                            
-                            // Adiciona ao time ou banco atual
-                            if (teamId === 'bench') {
-                                addPlayerToBench(player);
-                            } else {
-                                addPlayerToTeam(teamId, player);
-                            }
-                        }
-                    });
-                });
-            }
-
-            // Adicionar jogador a um time
-            function addPlayerToTeam(teamId, player) {
-                // Verificar se a lane já está preenchida
-                if (player.lane && teams[teamId].lanes[player.lane]) {
-                    alert(`Este time já tem um jogador na lane ${player.lane}!`);
-                    return;
-                }
-                
-                // Adicionar ao time
-                teams[teamId].players.push(player);
-                if (player.lane) {
-                    teams[teamId].lanes[player.lane] = player.name;
-                }
-                
-                // Atualizar pontuação
-                teams[teamId].score += tierScores[player.tier] || 0;
-                
-                // Atualizar UI
-                updateTeamUI(teamId);
-            }
-
-            // Adicionar jogador ao banco
-            function addPlayerToBench(player) {
-                teams.bench.players.push(player);
-                teams.bench.score += tierScores[player.tier] || 0;
-                updateTeamUI('bench');
-            }
-
-            function updateTeamUI(teamId) {
-    const team = teams[teamId];
-    const teamEl = teamElements[teamId];
-    teamEl.innerHTML = '';
-
-    if (teamId === 'bench') {
-        // Cria colunas para cada lane
-        const lanes = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
-        const benchGrid = document.createElement('div');
-        benchGrid.className = 'grid grid-cols-5 gap-2';
-
-        lanes.forEach(lane => {
-            const column = document.createElement('div');
-            column.className = 'space-y-2';
-
-            const title = document.createElement('div');
-            title.className = 'text-center font-bold text-sm text-gray-700';
-            title.textContent = lane;
-            column.appendChild(title);
-
-            const players = [...team.players]
-                .filter(p => p.lane === lane)
-                .sort((a, b) => (tierScores[b.tier] || 0) - (tierScores[a.tier] || 0));
-
-            players.forEach(player => {
-                const card = document.createElement('div');
-                card.className = `player-card bg-white rounded-lg p-2 shadow text-sm ${player.tier ? 'tier-' + player.tier.replace('+', 'plus') : ''}`;
-                card.draggable = true;
-                card.dataset.name = player.name;
-
-                card.innerHTML = `
-                    <div class="font-semibold text-gray-800 truncate">${player.name}</div>
-                    <div class="flex justify-between text-xs mt-1">
-                        <span class="text-gray-600">${player.tier || 'N/D'}</span>
-                        <button class="text-red-600 hover:text-red-800 remove-player" data-name="${player.name}">
-                            <i class="fas fa-times"></i>
+                        <button class="mt-2 text-xs text-red-600 hover:text-red-800 self-end remove-player" data-name="${player.name}">
+                            <i class="fas fa-times"></i> Remover
                         </button>
-                    </div>
-                `;
+                    `;
 
-                card.addEventListener('dragstart', function(e) {
-                    this.classList.add('dragging');
-                    e.dataTransfer.setData('text/plain', this.dataset.name);
-                    setTimeout(() => this.classList.add('opacity-0'), 0);
-                });
+                        playerCard.addEventListener('dragstart', function (e) {
+                            this.classList.add('dragging');
+                            e.dataTransfer.setData('text/plain', this.dataset.name);
+                            setTimeout(() => this.classList.add('opacity-0'), 0);
+                        });
 
-                card.addEventListener('dragend', function() {
-                    this.classList.remove('dragging', 'opacity-0');
-                });
+                        playerCard.addEventListener('dragend', function () {
+                            this.classList.remove('dragging', 'opacity-0');
+                        });
 
-                column.appendChild(card);
-            });
+                        teamEl.appendChild(playerCard);
+                    });
 
-            benchGrid.appendChild(column);
-        });
+                    const countEl = teamEl.previousElementSibling.querySelector('span');
+                    countEl.textContent = `${team.players.length}/5`;
 
-        teamEl.appendChild(benchGrid);
+                    Object.keys(team.lanes).forEach(lane => {
+                        document.getElementById(`${teamId}-${lane.toLowerCase()}`).textContent = team.lanes[lane] || '-';
+                    });
 
-        // Event listener para remover jogador
-        teamEl.querySelectorAll('.remove-player').forEach(btn => {
-            btn.addEventListener('click', function () {
-                removePlayerFromTeam(teamId, this.dataset.name);
-            });
-        });
+                    document.getElementById(`${teamId}-score`).textContent = team.score;
 
-        return; // Para não executar o restante
-    }
-
-    // Para times normais
-    const laneOrder = ['TOP', 'JG', 'MID', 'ADC', 'SUP'];
-    const orderedPlayers = [...team.players].sort((a, b) => {
-        const indexA = laneOrder.indexOf(a.lane);
-        const indexB = laneOrder.indexOf(b.lane);
-        return indexA - indexB;
-    });
-
-    orderedPlayers.forEach(player => {
-        const playerCard = document.createElement('div');
-        playerCard.className = `player-card bg-white rounded-lg p-3 shadow flex flex-col ${player.lane ? 'lane-' + player.lane : ''} ${player.tier ? 'tier-' + player.tier.replace('+', 'plus') : ''}`;
-        playerCard.draggable = true;
-        playerCard.dataset.name = player.name;
-
-        playerCard.innerHTML = `
-            <div class="font-semibold text-gray-800 truncate">${player.name}</div>
-            <div class="flex justify-between text-sm mt-1">
-                <span class="text-gray-600">${player.lane || 'N/D'}</span>
-                <span class="font-medium ${getTierColorClass(player.tier)}">${player.tier || 'N/D'}</span>
-            </div>
-            <button class="mt-2 text-xs text-red-600 hover:text-red-800 self-end remove-player" data-name="${player.name}">
-                <i class="fas fa-times"></i> Remover
-            </button>
-        `;
-
-        playerCard.addEventListener('dragstart', function(e) {
-            this.classList.add('dragging');
-            e.dataTransfer.setData('text/plain', this.dataset.name);
-            setTimeout(() => this.classList.add('opacity-0'), 0);
-        });
-
-        playerCard.addEventListener('dragend', function() {
-            this.classList.remove('dragging', 'opacity-0');
-        });
-
-        teamEl.appendChild(playerCard);
-    });
-
-    const countEl = teamEl.previousElementSibling.querySelector('span');
-    countEl.textContent = `${team.players.length}/5`;
-
-    Object.keys(team.lanes).forEach(lane => {
-        document.getElementById(`${teamId}-${lane.toLowerCase()}`).textContent = team.lanes[lane] || '-';
-    });
-
-    document.getElementById(`${teamId}-score`).textContent = team.score;
-
-    teamEl.querySelectorAll('.remove-player').forEach(btn => {
-        btn.addEventListener('click', function() {
-            removePlayerFromTeam(teamId, this.dataset.name);
-        });
-    });
-}
-
-
-            // Remover jogador do time ou banco
-            function removePlayerFromTeam(teamId, playerName) {
-                const team = teams[teamId];
-                const playerIndex = team.players.findIndex(p => p.name === playerName);
-                
-                if (playerIndex !== -1) {
-                    const player = team.players[playerIndex];
-                    
-                    // Remover da lane se estiver em uma (exceto banco)
-                    if (teamId !== 'bench' && player.lane && team.lanes[player.lane] === playerName) {
-                        team.lanes[player.lane] = null;
-                    }
-                    
-                    // Atualizar pontuação
-                    teams[teamId].score -= tierScores[player.tier] || 0;
-                    
-                    // Remover do array de jogadores
-                    team.players.splice(playerIndex, 1);
-                    
-                    // Atualizar UI
-                    updateTeamUI(teamId);
+                    teamEl.querySelectorAll('.remove-player').forEach(btn => {
+                        btn.addEventListener('click', function () {
+                            removePlayerFromTeam(teamId, this.dataset.name);
+                        });
+                    });
                 }
-            }
-            
-            // Aplicar filtros
-            function applyFilters() {
-                const tierFilter = document.getElementById('tierFilter').value;
-                const laneFilter = document.getElementById('laneFilter').value;
-                const searchTerm = document.getElementById('playerSearch').value.toLowerCase();
-                
-                filteredPlayers = playersData.filter(player => {
-                    const matchesTier = tierFilter === 'all' || player.tier === tierFilter || (tierFilter === 'A+' && player.tier === 'A+');
-                    const matchesLane = laneFilter === 'all' || player.lane === laneFilter;
-                    const matchesSearch = player.name.toLowerCase().includes(searchTerm);
-                    
-                    return matchesTier && matchesLane && matchesSearch;
-                });
-                
-                renderPlayersList(filteredPlayers);
-            }
 
-            // Obter classe de cor do tier
-            function getTierColorClass(tier) {
-                switch(tier) {
-                    case 'S': return 'text-red-600';
-                    case 'A+': return 'text-orange-500';
-                    case 'A': return 'text-yellow-600';
-                    case 'B': return 'text-green-600';
-                    case 'C': return 'text-greay-600';
-                    case 'C-': return 'text-greay-600';
+
+                // Remover jogador do time ou banco
+                function removePlayerFromTeam(teamId, playerName) {
+                    const team = teams[teamId];
+                    const playerIndex = team.players.findIndex(p => p.name === playerName);
+
+                    if (playerIndex !== -1) {
+                        const player = team.players[playerIndex];
+
+                        // Remover da lane se estiver em uma (exceto banco)
+                        if (teamId !== 'bench' && player.lane && team.lanes[player.lane] === playerName) {
+                            team.lanes[player.lane] = null;
+                        }
+
+                        // Atualizar pontuação
+                        teams[teamId].score -= tierScores[player.tier] || 0;
+
+                        // Remover do array de jogadores
+                        team.players.splice(playerIndex, 1);
+
+                        // Atualizar UI
+                        updateTeamUI(teamId);
+                    }
+                }
+
+                // Aplicar filtros
+                function applyFilters() {
+                    const tierFilter = document.getElementById('tierFilter').value;
+                    const laneFilter = document.getElementById('laneFilter').value;
+                    const searchTerm = document.getElementById('playerSearch').value.toLowerCase();
+
+                    // Mostrar apenas jogadores que NÃO estão no banco de reservas
+                    const benchNames = teams.bench.players.map(p => p.name);
+                    filteredPlayers = playersData.filter(player => {
+                        if (benchNames.includes(player.name)) return false;
+                        const matchesTier = tierFilter === 'all' || player.tier === tierFilter || (tierFilter === 'A+' && player.tier === 'A+');
+                        const matchesLane = laneFilter === 'all' || player.lane === laneFilter;
+                        const matchesSearch = player.name.toLowerCase().includes(searchTerm);
+                        return matchesTier && matchesLane && matchesSearch;
+                    });
+
+                    renderPlayersList(filteredPlayers);
+                }
+
+                // Obter classe de cor do tier
+                function getTierColorClass(tier) {
+                    switch (tier) {
+                        case 'S': return 'text-red-600';
+                        case 'A+': return 'text-orange-500';
+                        case 'A': return 'text-yellow-600';
+                        case 'B': return 'text-green-600';
+                        case 'C': return 'text-greay-600';
+                        case 'C-': return 'text-greay-600';
                         case 'D': return 'text-greay-600';
                         case 'E': return 'text-greay-600';
                         case 'F': return 'text-greay-600';
-                    default: return 'text-gray-500';
+                        default: return 'text-gray-500';
+                    }
                 }
-            }
-        });
-    </script>
-<!-- Footer -->
-<footer>
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <h4 class="mb-4"><i class="fas fa-fire-alt me-2"></i>INSALUBRÃO</h4>
-                <p>A comunidade mais insalubre (e divertida) de jogos competitivos. Competição, camaradagem e muita diversão.</p>
-                <div class="mt-4">
-                    <a href="https://discord.gg/kgMux6Mhma" class="social-icon me-2"><i class="fab fa-discord"></i></a>
-                    <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/ligacmim?igsh=dXB0NzY5OTZsZ3Fl" class="social-icon me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitch"></i></a>
+            })
+        </script>
+        <!-- Footer -->
+        <footer>
+            <div class="container py-4">
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <h4 class="mb-4"><i class="fas fa-fire-alt me-2"></i>INSALUBRÃO</h4>
+                        <p>A comunidade mais insalubre (e divertida) de jogos competitivos. Competição, camaradagem e
+                            muita diversão.</p>
+                        <div class="mt-4">
+                            <a href="https://discord.gg/kgMux6Mhma" class="social-icon me-2"><i
+                                    class="fab fa-discord"></i></a>
+                            <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/ligacmim?igsh=dXB0NzY5OTZsZ3Fl"
+                                class="social-icon me-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitch"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <h5 class="mb-4">Links Rápidos</h5>
+                        <div class="footer-links">
+                            <a href="#home"><i class="fas fa-chevron-right me-2"></i>Home</a>
+                            <a href="#about"><i class="fas fa-chevron-right me-2"></i>Sobre</a>
+                            <a href="#features"><i class="fas fa-chevron-right me-2"></i>Recursos</a>
+                            <a href="#events"><i class="fas fa-chevron-right me-2"></i>Eventos</a>
+                            <a href="#players"><i class="fas fa-chevron-right me-2"></i>Players</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="mb-4">Comunidade</h5>
+                        <div class="footer-links">
+                            <a href="#"><i class="fas fa-chevron-right me-2"></i>Regras</a>
+                            <a href="#"><i class="fas fa-chevron-right me-2"></i>Ranking</a>
+                            <a href="#"><i class="fas fa-chevron-right me-2"></i>Galeria</a>
+                            <a href="#"><i class="fas fa-chevron-right me-2"></i>FAQ</a>
+                            <a href="#"><i class="fas fa-chevron-right me-2"></i>Parceiros</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="mb-4">Contato</h5>
+                        <div class="footer-links">
+                            <a href="#"><i class="fas fa-envelope me-2"></i>paredes.pessoal@outlook.com.br</a>
+                            <a href="#"><i class="fas fa-phone me-2"></i>+55 (41) 8841-9886</a>
+                            <a href="#"><i class="fas fa-map-marker-alt me-2"></i>Paraná, Brasil</a>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">&copy; 2025 INSALUBRÃO. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">Desenvolvido com <i class="fas fa-heart text-danger"></i> pela Comunidade</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h5 class="mb-4">Links Rápidos</h5>
-                <div class="footer-links">
-                    <a href="#home"><i class="fas fa-chevron-right me-2"></i>Home</a>
-                    <a href="#about"><i class="fas fa-chevron-right me-2"></i>Sobre</a>
-                    <a href="#features"><i class="fas fa-chevron-right me-2"></i>Recursos</a>
-                    <a href="#events"><i class="fas fa-chevron-right me-2"></i>Eventos</a>
-                    <a href="#players"><i class="fas fa-chevron-right me-2"></i>Players</a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="mb-4">Comunidade</h5>
-                <div class="footer-links">
-                    <a href="#"><i class="fas fa-chevron-right me-2"></i>Regras</a>
-                    <a href="#"><i class="fas fa-chevron-right me-2"></i>Ranking</a>
-                    <a href="#"><i class="fas fa-chevron-right me-2"></i>Galeria</a>
-                    <a href="#"><i class="fas fa-chevron-right me-2"></i>FAQ</a>
-                    <a href="#"><i class="fas fa-chevron-right me-2"></i>Parceiros</a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="mb-4">Contato</h5>
-                <div class="footer-links">
-                    <a href="#"><i class="fas fa-envelope me-2"></i>paredes.pessoal@outlook.com.br</a>
-                    <a href="#"><i class="fas fa-phone me-2"></i>+55 (41) 8841-9886</a>
-                    <a href="#"><i class="fas fa-map-marker-alt me-2"></i>Paraná, Brasil</a>
-                </div>
-            </div>
-        </div>
-        
-        <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
-        
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0">&copy; 2025 INSALUBRÃO. Todos os direitos reservados.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <p class="mb-0">Desenvolvido com <i class="fas fa-heart text-danger"></i> pela Comunidade</p>
-            </div>
-        </div>
-    </div>
-</footer>
-</body>
+        </footer>
+    </body>
+
 </html>
